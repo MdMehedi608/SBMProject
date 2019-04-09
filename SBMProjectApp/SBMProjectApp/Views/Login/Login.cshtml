@@ -1,0 +1,122 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login</title>
+    <!-- Core CSS -->
+    <link href="~/Content/admin/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/admin/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="~/Content/admin/assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/admin/assets/css/login.css" rel="stylesheet">
+    <!-- Checkboxes style -->
+    <link href="~/Content/admin/assets/css/bootstrap-checkbox.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+
+
+            <div class="card">
+                <h4 class="card-header">Login</h4>
+
+                <div class="card-body">
+
+                    <form id="form" data-toggle="validator" role="form" method="post" action="Login">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="UserName">User Name</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope-open-o" aria-hidden="true"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" name="UserName" id="UserName" data-parsley-trigger="UserName" required>
+                                    </div>
+                                    <div class="help-block with-errors text-danger"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="Password">Password</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-unlock" aria-hidden="true"></i></span>
+                                        </div>
+                                        <input data-minlength="8" name="Password" id="Password" type="password" class="form-control" placeholder="Password" required>
+                                    </div>
+                                    <div class="help-block with-errors text-danger"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox_remember" type="checkbox" name="remember">
+                                <label for="checkbox_remember"> Remember me</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="hidden" name="redirect" value="" />
+                                <input type="submit" class="btn btn-primary btn-lg btn-block" value="Login" name="submit" />
+                            </div>
+                        </div>
+                    </form>
+                    <div class="clear"></div>
+
+                    <i class="fa fa-user fa-fw"></i> No account yet? <a href="register.html">Register new account</a><br />
+                    <i class="fa fa-undo fa-fw"></i> Forgot password? <a href="reset-password.html">Reset password</a>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Core Scripts -->
+    <script src="~/Content/admin/assets/js/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/admin/assets/js/bootstrap.min.js"></script>
+    <!-- BEGIN Java Script for this page -->
+    <script src="~/Content/admin/assets/plugins/parsleyjs/parsley.min.js"></script>
+    <script>
+        $('#form').parsley();
+        $(document).ready(function ($) {
+            // Hide Loader
+            $("#loading").hide();
+
+            //Logout Information
+            $("#logout").click(function () {
+                $.ajax({
+                    url: '/security/FxSignOut/',
+                    dataType: "json",
+                    type: "POST",
+                    contentType: 'application/json; charset=utf-8',
+                    async: false,
+                    processData: false,
+                    cache: false,
+                    success: function (data) {
+                        if (data.isCompleted == true) {
+                            window.location.href = '/security/login/';
+                        }
+                    },
+                    error: function (xhr) {
+                        ShowOpMessage("Sign Out", false, "");
+                    }
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>

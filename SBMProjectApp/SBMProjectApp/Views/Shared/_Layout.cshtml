@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <!-- Bootstrap CSS -->
+    @*<link href="~/Content/admin/assets/css/bootstrap.min.css" rel="stylesheet" />*@
+    <link href="~/Content/bootstrap-material/docs.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-material/bootstrap-material-design.min.css" rel="stylesheet" />
+    <!-- Font-awesome CSS -->
+    <link href="~/Content/bootstrap-material/material-font.css" rel="stylesheet" />
+    <link href="~/Content/admin/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="~/Content/admin/assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/toastr.min.css" rel="stylesheet" />
+    @RenderSection("section_top", required: false)
+</head>
+<body class="adminbody">
+    <div id="main">
+        <div class="headerbar">
+
+            <!-- LOGO -->
+            <div class="headerbar-left">
+                <a href="index.html" class="logo"><img alt="Logo" src="~/Content/admin/assets/images/logo.png" /> <span>Admin</span></a>
+            </div>
+
+            <nav class="navbar-custom">
+
+                <ul class="list-inline float-right mb-0">
+
+                    <li class="list-inline-item dropdown notif">
+                        <a class="nav-link dropdown-toggle nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                            <img src="~/Content/admin/assets/images/avatars/admin.png" alt="Profile image" class="avatar-rounded">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                            <!-- item-->
+                            <div class="dropdown-item noti-title">
+                                <h5 class="text-overflow"><small>Hello, admin</small> </h5>
+                            </div>
+
+                            <!-- item-->
+                            <a href="pro-profile.html" class="dropdown-item notify-item">
+                                <i class="fa fa-user"></i> <span>Profile</span>
+                            </a>
+
+                            <!-- item-->
+                            <a href="#" class="dropdown-item notify-item" id="logout">
+                                <i class="fa fa-power-off"></i> <span>Logout</span>
+                            </a>
+                        </div>
+                    </li>
+
+                </ul>
+
+                <ul class="list-inline menu-left mb-0">
+                    <li class="float-left">
+                        <button class="button-menu-mobile open-left">
+                            <i class="fa fa-fw fa-bars"></i>
+                        </button>
+                    </li>
+                </ul>
+
+            </nav>
+
+        </div>
+        <!-- End Navigation -->
+        <!-- Left Sidebar -->
+        <div class="left main-sidebar">
+
+            <div class="sidebar-inner leftscroll">
+
+                <div id="sidebar-menu">
+
+                    <ul>
+
+                        <li class="submenu">
+                            <a class="active" href="#"><i class="fa fa-fw fa-bars"></i><span> Dashboard </span> </a>
+                        </li>
+                        <li class="submenu">
+                            @*<a href="#"><i class="fa fa-fw fa-file-text-o"></i> <span> Forms </span> <span class="menu-arrow"></span></a>*@
+                            @Html.ActionLink("Customer", "CustomerList", "Customer", null, new { @class = "navbar-brand" })
+                        </li>
+
+                        @*<li class="submenu">
+                                <a href="#"><i class="fa fa-fw fa-file-text-o"></i> <span> Forms </span> <span class="menu-arrow"></span></a>
+                                <ul class="list-unstyled">
+                                    <li><a href="forms-general.html">General Elements</a></li>
+                                    <li><a href="forms-select2.html">Select2</a></li>
+                                    <li><a href="forms-validation.html">Form Validation</a></li>
+                                    <li><a href="forms-text-editor.html">Text Editors</a></li>
+                                    <li><a href="forms-upload.html">Multiple File Upload</a></li>
+                                    <li><a href="forms-datetime-picker.html">Date and Time Picker</a></li>
+                                    <li><a href="forms-color-picker.html">Color Picker</a></li>
+                                </ul>
+                            </li>*@
+
+
+
+                    </ul>
+
+                    <div class="clearfix"></div>
+
+                </div>
+
+                <div class="clearfix"></div>
+
+            </div>
+
+        </div>
+        <!-- End Sidebar -->
+        <div class="content-page">
+
+            <!-- Start content -->
+            <div class="content">
+                <div class="container-fluid body-content">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            @{
+                                if (ViewBag.CallingForm1 == "index")
+                                {
+
+                                }
+                                else
+                                {
+
+                                    <div class="breadcrumb-holder">
+                                        <h1 class="main-title float-left">@ViewBag.CallingForm</h1>
+                                        <ol class="breadcrumb float-right">
+                                            <li class="breadcrumb-item"><a href="#">@ViewBag.CallingForm</a></li>
+                                            <li class="breadcrumb-item"><a href="@ViewBag.CallingViewPage" class="active">@ViewBag.CallingForm1</a></li>
+                                            @if (@ViewBag.CallingForm2 != null)
+                                            {
+                                                <li class="breadcrumb-item"><a href="#" class="active">@ViewBag.CallingForm2</a></li>
+                                            }
+                                        </ol>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                    <div id="loading">
+                        <img id="imagen" src="~/Content/admin/assets/images/progress/progress-circle-success.svg" alt="Loading..." />
+                        <div id="timer">Timer</div>
+                    </div>
+                    @RenderBody()
+                    <hr />
+                    <footer>
+                        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="~/Content/admin/assets/js/jquery.min.js"></script>
+    <script src="~/Content/admin/assets/js/jquery-ui.min.js"></script>
+    <script src="~/Content/admin/assets/js/modernizr.min.js"></script>
+    <script src="~/Content/bootstrap-material/popper.js"></script>
+    @*<script src="~/Content/admin/assets/js/bootstrap.min.js"></script>*@
+    <script src="~/Content/bootstrap-material/bootstrap-material-design.js"></script>
+    <script src="~/Content/admin/assets/js/moment.min.js"></script>
+
+    <script src="~/Content/admin/assets/js/detect.js"></script>
+    <script src="~/Content/admin/assets/js/fastclick.js"></script>
+    <script src="~/Content/admin/assets/js/jquery.blockUI.js"></script>
+    <script src="~/Content/admin/assets/js/jquery.nicescroll.js"></script>
+    <!-- App js -->
+    <script src="~/Content/admin/assets/js/pikeadmin.js"></script>
+    <script src="~/Content/admin/assets/plugins/parsleyjs/parsley.min.js"></script>
+    <!-- Counter-Up-->
+    <script src="~/Content/admin/assets/plugins/waypoints/lib/jquery.waypoints.min.js"></script>
+    <script src="~/Content/admin/assets/plugins/counterup/jquery.counterup.min.js"></script>
+    <script src="~/Content/toastr.min.js"></script>
+    <script>$(document).ready(function () { $('body').bootstrapMaterialDesign(); });</script>
+    @RenderSection("section_footer", required: false)
+
+    <script>
+        $(document).ready(function ($) {
+            // Hide Loader
+            $("#loading").hide();
+
+            //Logout Information
+            $("#logout").click(function () {
+                alert("ok");
+                $.ajax({
+                    url: '/Login/LogOut/',
+                    dataType: "json",
+                    type: "POST",
+                    contentType: 'application/json; charset=utf-8',
+                    async: false,
+                    processData: false,
+                    cache: false,
+                    success: function (data) {
+                        if (data.isCompleted == true) {
+                            window.location.href = '/Login/Login/';
+                        }
+                    },
+                    error: function (xhr) {
+                        ShowOpMessage("Sign Out", false, "");
+                    }
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>

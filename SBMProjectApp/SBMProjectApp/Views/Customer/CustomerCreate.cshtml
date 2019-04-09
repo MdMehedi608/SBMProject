@@ -1,0 +1,56 @@
+﻿@model SBMProjectModel.Models.Customer
+@{
+    ViewBag.Title = "Customer Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section section_top
+{
+}
+<div class="form-group">
+    @if (ViewBag.SMsg != null)
+    {
+        <div class="col-md-offset-2 col-md-10" style="color:green">
+            @ViewBag.SMsg
+        </div>
+    }
+    @if (ViewBag.FMsg != null)
+    {
+        <div class="col-md-offset-2 col-md-10" style="color:red">
+            @ViewBag.FMsg
+        </div>
+    }
+
+</div>
+<div class="row">
+    <div class="col-12">
+        <form method="POST" data-parsley-validate novalidate>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="exampleInputName" class="bmd-label-floating">Name<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="exampleInputName" name="Name" data-parsley-trigger="Name" required>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="exampleTextarea" class="bmd-label-floating">Example textarea</label>
+                        <textarea class="form-control" id="exampleTextarea" rows="3" name="Address"></textarea>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary btn-raised">Submit</button>
+                    <button type="button" class="btn btn-default">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section section_footer
+{
+    <!-- BEGIN Java Script for this page -->
+}
+
+
